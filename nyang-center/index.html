@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f0fa">
+<meta name="description" content="렉돌 대장 보라의 냥냥 AI센터. 프로젝트 업무를 한 화면에서 관리하는 로컬 시제품.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./styles.css">
+<title>냥냥 AI센터 2.0 | 대장 보라</title>
+</head>
+<body>
+<div class="app-shell">
+  <header class="masthead">
+    <div class="brand">
+      <div id="bossCat" class="boss-pixel" aria-hidden="true"></div>
+      <div class="brand-copy"><span class="eyebrow">BORA'S LITTLE AI OFFICE</span><h1>냥냥 AI센터 <span>2.0</span></h1><p>렉돌 대장 보라와 뽈뽈 일하는 고양이 직원들</p></div>
+    </div>
+    <div class="toolbar"><span class="local-indicator"><span class="local-dot"></span> 기기별 업무판 · AI 미연동</span><button class="soft-button" id="refreshBtn" title="이 기기 자료 불러오기">새로고침</button><button class="soft-button" id="connectionsBtn" title="현재 연동 확인">연결상태</button><button class="soft-button" id="installBtn" title="휴대폰에 추가">앱 바로가기</button><button class="soft-button" id="exportBtn" title="업무 데이터를 파일로 백업">백업</button><button class="soft-button" id="importBtn" title="백업 데이터를 불러오기">복원</button><input id="importFile" class="sr-only" type="file" accept="application/json,.json"></div>
+  </header>
+
+  <section class="command-bar" aria-label="업무 접수">
+    <span class="command-symbol">✦</span>
+    <input id="command" type="text" maxlength="500" placeholder="대장 보라, 어떤 일을 맡길까? 예: 월운도사 결과 화면 구성" aria-label="업무 내용">
+    <select id="commandRoom" aria-label="업무 사무실"></select>
+    <button class="button solid" id="assign">+ 업무 접수</button>
+  </section>
+
+  <main>
+    <section class="overview" aria-labelledby="officeHeading">
+      <div class="section-bar"><div><h2 id="officeHeading">우리 사무실 <span class="paw">✿</span></h2><p>전체 프로젝트를 한눈에 보고, 방을 누르면 자세히 볼 수 있어요. <span id="lastUpdated"></span></p></div><div class="stats"><span>사무실 <b id="roomCount">0</b></span><span>답변대기 <b id="waitingCount">0</b></span><span>진행중 <b id="workingCount">0</b></span><span>완료 <b id="doneCount">0</b></span></div></div>
+      <div class="office-grid" id="rooms"></div>
+    </section>
+
+    <section class="bottom-grid">
+      <div class="board" id="waiting" aria-labelledby="waitingHeading"><div class="board-header"><div><h2 id="waitingHeading">✉ 보라님 답변 필요 <span id="waitingBadge" class="count-bubble">0</span></h2><p>상세 화면에 들어가지 않고 바로 선택할 수 있어요.</p></div><button class="text-button" id="gotoMeeting">전체 보기 ›</button></div><div class="decision-list" id="needs"></div></div>
+      <div class="board board-meeting" id="meetingPanel"><div class="board-header"><div><h2>▦ 회의실 · 전체 업무</h2><p>업무 상태와 AI 의견을 한 곳에 모아요.</p></div><button class="text-button" id="openMeeting">크게 보기 ↗</button></div><div class="status-tabs" id="tabs"></div><div class="record-list" id="records"></div></div>
+    </section>
+    <div class="footnote">작업은 이 브라우저에 저장됩니다. AI·피클 자동 전달과 여러 기기 동기화는 아직 미연동입니다. 개인정보는 입력하지 마세요. <span>© NYANGNYANG AI CENTER</span></div>
+  </main>
+</div>
+<button class="floating-action" id="improve"><span>✎</span> 개선 요청</button>
+<div class="modal-overlay hidden" id="modalBg"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><header><div><span class="eyebrow">NYANGNYANG CENTER</span><h2 id="modalTitle">작업 상세</h2></div><button id="close" class="icon-button" aria-label="창 닫기">✕</button></header><div id="modalContents"></div></section></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./app.js" defer></script>
+</body>
+</html>
